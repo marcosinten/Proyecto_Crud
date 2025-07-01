@@ -65,3 +65,6 @@ class Repartidor(Persona):
 
     def __str__(self):
         return f"{super().__str__()} - Disponible: {self.get_disponible_display()}"
+
+
+

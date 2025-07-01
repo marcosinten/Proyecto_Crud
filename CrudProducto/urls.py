@@ -34,4 +34,7 @@ urlpatterns = [
     path('ordenes/paso1/', views.crear_orden_paso1, name='orden_paso1'),
     path('ordenes/paso2/', views.crear_orden_paso2, name='orden_paso2'),
     path('ordenes/paso3/', views.crear_orden_paso3, name='orden_paso3'),
+    #backup
+    path('backup/', views.descargar_backup, name='descargar_backup'),
+
 ]

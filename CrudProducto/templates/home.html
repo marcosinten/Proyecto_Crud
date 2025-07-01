@@ -147,7 +147,6 @@
             margin-right: 0.8rem;
         }
 
-        /* Colores específicos para cada botón */
         .btn-productos {
             background: linear-gradient(135deg, #e3f2fd, #bbdefb);
         }
@@ -188,6 +187,14 @@
             background: linear-gradient(135deg, #e91e63, #c2185b);
         }
 
+        .btn-backup {
+            background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+        }
+
+        .btn-backup:hover::before {
+            background: linear-gradient(135deg, #00acc1, #00838f);
+        }
+
         @media (max-width: 768px) {
             .main-container {
                 padding: 2rem 1.5rem;
@@ -219,34 +226,35 @@
                     <p class="subtitle">Gestiona tu negocio de manera eficiente</p>
 
                     <div class="d-grid gap-3">
-                        <!-- Enlace al listado de productos -->
                         <a href="{% url 'productos:listar_productos' %}" class="menu-btn btn-productos">
                             <i class="fas fa-clipboard-list"></i>
-                            <span><span class="emoji">📋</span> Listado de Productos</span>
+                            <span><span class="emoji"></span> Listado de Productos</span>
                         </a>
 
-                        <!-- Enlace para crear una nueva orden -->
                         <a href="{% url 'productos:orden_paso1' %}" class="menu-btn btn-pedido">
                             <i class="fas fa-shopping-cart"></i>
-                            <span><span class="emoji">🛒</span> Hacer un Pedido</span>
+                            <span><span class="emoji"></span> Hacer un Pedido</span>
                         </a>
 
-                        <!-- Enlace al listado de órdenes -->
                         <a href="{% url 'productos:listar_ordenes' %}" class="menu-btn btn-ordenes">
                             <i class="fas fa-box"></i>
-                            <span><span class="emoji">📦</span> Ver mis Pedidos</span>
+                            <span><span class="emoji"></span> Ver mis Pedidos</span>
                         </a>
 
-                        <!-- Enlace al listado de clientes -->
                         <a href="{% url 'productos:listar_clientes' %}" class="menu-btn btn-clientes">
                             <i class="fas fa-users"></i>
-                            <span><span class="emoji">👤</span> Ver Clientes</span>
+                            <span><span class="emoji"></span> Ver Clientes</span>
                         </a>
 
-                        <!-- Enlace al listado de repartidores -->
                         <a href="{% url 'productos:listar_repartidores' %}" class="menu-btn btn-repartidores">
                             <i class="fas fa-motorcycle"></i>
-                            <span><span class="emoji">🚴</span> Ver Repartidores</span>
+                            <span><span class="emoji"></span> Ver Repartidores</span>
+                        </a>
+
+                        <!-- BOTÓN DE BACKUP -->
+                        <a href="{% url 'productos:descargar_backup' %}" class="menu-btn btn-backup">
+                            <i class="fas fa-database"></i>
+                            <span><span class="emoji"></span> Descargar Backup</span>
                         </a>
                     </div>
                 </div>

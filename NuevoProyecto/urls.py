@@ -24,6 +24,6 @@ from CrudProducto.views import home  # <--- AQUÍ lo importaste
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home, name='home'),  # <--- Y AQUÍ lo usaste para la raíz
-    path('productos/', include('CrudProducto.urls')),  # <--- Rutas del CRUD
+    path('', home, name='home'),  # <raíz
+    path('productos/', include('CrudProducto.urls')),  # < Rutas del CRUD
 ]

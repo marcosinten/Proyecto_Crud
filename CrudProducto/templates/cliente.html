@@ -6,77 +6,623 @@
     <title>{{ title }}</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #64748b;
+            --success-color: #059669;
+            --warning-color: #d97706;
+            --danger-color: #dc2626;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+            --accent-color: #475569;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(30, 58, 138, 0.15);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 50%;
+            transform: translate(-20px, 20px);
+        }
+
+        .header-title {
+            font-weight: 700;
+            font-size: 2.25rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-subtitle {
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            padding: 2rem;
+        }
+
+        .btn-elegant {
+            border-radius: 12px;
+            font-weight: 500;
+            padding: 12px 24px;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.1);
+        }
+
+        .btn-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(30, 58, 138, 0.2);
+        }
+
+        .btn-primary-elegant {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+        .btn-success-elegant {
+            background: linear-gradient(135deg, var(--success-color) 0%, #047857 100%);
+            color: white;
+        }
+
+        .btn-warning-elegant {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #b45309 100%);
+            color: white;
+        }
+
+        .btn-danger-elegant {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #b91c1c 100%);
+            color: white;
+        }
+
+        .btn-outline-elegant {
+            border: 2px solid var(--border-color);
+            background: white;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .btn-outline-elegant:hover {
+            background: var(--light-color);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .table-elegant {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.1);
+            background: white;
+        }
+
+        .table-elegant thead th {
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--accent-color) 100%);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 1.2rem 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-elegant tbody td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .table-elegant tbody tr:hover {
+            background-color: rgba(30, 58, 138, 0.04);
+        }
+
+        .table-elegant tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .card-elegant {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.1);
+            overflow: hidden;
+        }
+
+        .card-elegant .card-body {
+            padding: 2rem;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .status-badge {
+            background: linear-gradient(135deg, var(--success-color) 0%, #047857 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .status-badge.regular {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #475569 100%);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm-elegant {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            border-radius: 8px;
+        }
+
+        .footer-section {
+            background: var(--light-color);
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 4px rgba(30, 58, 138, 0.1);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .icon-primary {
+            background: rgba(30, 58, 138, 0.1);
+            color: var(--primary-color);
+        }
+
+        .client-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .client-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1d4ed8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            margin-right: 12px;
+        }
+
+        .client-details h6 {
+            margin: 0;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .client-details small {
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .main-container {
+                margin: 10px;
+                border-radius: 16px;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container mt-4">
-        <h1 class="mb-4">{{ title }}</h1>
+<body>
+    <div class="container-fluid px-3">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+                <div class="main-container">
+                    <!-- Header Section -->
+                    <div class="header-section">
+                        <div class="icon-box icon-primary d-inline-flex">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                        <h1 class="header-title">{{ title }}</h1>
+                        <p class="header-subtitle mb-0">
+                            {% if vista == "lista" %}
+                                Gestiona tus clientes de forma profesional
+                            {% elif vista == "form" %}
+                                {% if object %}Actualizar información del cliente{% else %}Registrar nuevo cliente{% endif %}
+                            {% elif vista == "delete" %}
+                                Confirmación de eliminación
+                            {% endif %}
+                        </p>
+                    </div>
 
-        {% if vista == "lista" %}
-            <a href="{% url 'productos:crear_cliente' %}" class="btn btn-primary mb-3">Crear nuevo cliente</a>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellidos</th>
-                            <th>Cédula</th>
-                            <th>Teléfono</th>
-                            <th>Correo</th>
-                            <th>Cliente Frecuente</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for c in clientes %}
-                        <tr>
-                            <td>{{ c.nombre }}</td>
-                            <td>{{ c.apellidos }}</td>
-                            <td>{{ c.cedula }}</td>
-                            <td>{{ c.telefono }}</td>
-                            <td>{{ c.correo }}</td>
-                            <td>{{ c.cliente_frecuente }}</td>
-                            <td>
-                                <a href="{% url 'productos:actualizar_cliente' c.id %}" class="btn btn-sm btn-warning">Editar</a>
-                                <a href="{% url 'productos:eliminar_cliente' c.id %}" class="btn btn-sm btn-danger">Eliminar</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    <!-- Content Section -->
+                    <div class="content-section">
+                        {% if vista == "lista" %}
+                            <!-- Header Section (sin botón de Nuevo Cliente) -->
+                            <div class="mb-4">
+                                <h5 class="mb-1">Directorio de Clientes</h5>
+                                <p class="text-muted mb-0">{{ clientes|length }} cliente{{ clientes|length|pluralize }}</p>
+                            </div>
 
-        {% elif vista == "form" %}
-            <div class="card">
-                <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{% url 'productos:listar_clientes' %}" class="btn btn-secondary">Cancelar</a>
-                    </form>
+                            <!-- Clients Table -->
+                            <div class="table-responsive">
+                                <table class="table table-elegant mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="bi bi-person me-2"></i>Cliente</th>
+                                            <th><i class="bi bi-card-text me-2"></i>Identificación</th>
+                                            <th><i class="bi bi-telephone me-2"></i>Contacto</th>
+                                            <th><i class="bi bi-star me-2"></i>Estado</th>
+                                            <th><i class="bi bi-gear me-2"></i>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for c in clientes %}
+                                        <tr>
+                                            <td>
+                                                <div class="client-info">
+                                                    <div class="client-avatar">
+                                                        {{ c.nombre|first|upper }}{{ c.apellidos|first|upper }}
+                                                    </div>
+                                                    <div class="client-details">
+                                                        <h6>{{ c.nombre }} {{ c.apellidos }}</h6>
+                                                        <small>{{ c.correo }}</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <code class="bg-light px-2 py-1 rounded">{{ c.cedula }}</code>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>
+                                                    <i class="bi bi-telephone me-2 text-muted"></i>{{ c.telefono }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {% if c.cliente_frecuente %}
+                                                    <span class="status-badge">
+                                                        <i class="bi bi-star-fill me-1"></i>Frecuente
+                                                    </span>
+                                                {% else %}
+                                                    <span class="status-badge regular">
+                                                        <i class="bi bi-person me-1"></i>Regular
+                                                    </span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <a href="{% url 'productos:actualizar_cliente' c.id %}"
+                                                       class="btn btn-warning-elegant btn-sm-elegant btn-elegant">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{% url 'productos:eliminar_cliente' c.id %}"
+                                                       class="btn btn-danger-elegant btn-sm-elegant btn-elegant">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="5" class="text-center py-5">
+                                                <div class="icon-box icon-primary mx-auto mb-3">
+                                                    <i class="bi bi-person-plus"></i>
+                                                </div>
+                                                <h6 class="text-muted">No hay clientes registrados</h6>
+                                                <p class="text-muted mb-0">No se encontraron clientes en el sistema</p>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        {% elif vista == "form" %}
+                            <!-- Form Card -->
+                            <div class="card-elegant">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <form method="post" class="needs-validation" novalidate>
+                                                {% csrf_token %}
+
+                                                <div class="row g-3">
+                                                    <div class="col-md-6">
+                                                        <label for="{{ form.nombre.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-person me-2"></i>Nombres
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        {{ form.nombre }}
+                                                        {% if form.nombre.errors %}
+                                                            <div class="text-danger small mt-1">
+                                                                {{ form.nombre.errors.0 }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="{{ form.apellidos.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-person-badge me-2"></i>Apellidos
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        {{ form.apellidos }}
+                                                        {% if form.apellidos.errors %}
+                                                            <div class="text-danger small mt-1">
+                                                                {{ form.apellidos.errors.0 }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="{{ form.cedula.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-card-text me-2"></i>Cédula
+                                                            <span class="text-danger">*</span>
+                                                        </label>
+                                                        {{ form.cedula }}
+                                                        {% if form.cedula.errors %}
+                                                            <div class="text-danger small mt-1">
+                                                                {{ form.cedula.errors.0 }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="{{ form.telefono.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-telephone me-2"></i>Teléfono
+                                                        </label>
+                                                        {{ form.telefono }}
+                                                        {% if form.telefono.errors %}
+                                                            <div class="text-danger small mt-1">
+                                                                {{ form.telefono.errors.0 }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <label for="{{ form.correo.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-envelope me-2"></i>Correo Electrónico
+                                                        </label>
+                                                        {{ form.correo }}
+                                                        {% if form.correo.errors %}
+                                                            <div class="text-danger small mt-1">
+                                                                {{ form.correo.errors.0 }}
+                                                            </div>
+                                                        {% endif %}
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="form-check">
+                                                            {{ form.cliente_frecuente }}
+                                                            <label class="form-check-label" for="{{ form.cliente_frecuente.id_for_label }}">
+                                                                <i class="bi bi-star me-2"></i>Cliente Frecuente
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex gap-3 mt-4 pt-3 border-top">
+                                                    <button type="submit" class="btn btn-success-elegant btn-elegant">
+                                                        <i class="bi bi-check-lg me-2"></i>Guardar Cliente
+                                                    </button>
+                                                    <a href="{% url 'productos:listar_clientes' %}" class="btn btn-outline-elegant btn-elegant">
+                                                        <i class="bi bi-x-lg me-2"></i>Cancelar
+                                                    </a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="stats-card">
+                                                <div class="icon-box icon-primary">
+                                                    <i class="bi bi-info-circle"></i>
+                                                </div>
+                                                <h6>Información Importante</h6>
+                                                <ul class="list-unstyled text-muted small">
+                                                    <li class="mb-2">• Todos los campos marcados con * son obligatorios</li>
+                                                    <li class="mb-2">• La cédula debe ser única en el sistema</li>
+                                                    <li class="mb-2">• Los clientes frecuentes obtienen beneficios especiales</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% elif vista == "delete" %}
+                            <!-- Delete Confirmation -->
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="card-elegant border-danger">
+                                        <div class="card-body text-center">
+                                            <div class="icon-box mx-auto mb-3" style="background: rgba(220, 38, 38, 0.1); color: var(--danger-color);">
+                                                <i class="bi bi-exclamation-triangle"></i>
+                                            </div>
+
+                                            <h5 class="mb-3">Confirmar Eliminación</h5>
+                                            <p class="text-muted mb-4">
+                                                ¿Estás seguro que deseas eliminar al cliente?
+                                            </p>
+
+                                            <div class="alert alert-light border">
+                                                <div class="client-info justify-content-center">
+                                                    <div class="client-avatar">
+                                                        {{ cliente.nombre|first|upper }}{{ cliente.apellidos|first|upper }}
+                                                    </div>
+                                                    <div class="client-details text-start">
+                                                        <h6>{{ cliente.nombre }} {{ cliente.apellidos }}</h6>
+                                                        <small>{{ cliente.correo }}</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                <small>Esta acción no se puede deshacer</small>
+                                            </div>
+
+                                            <form method="post" class="d-flex gap-3 justify-content-center">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger-elegant btn-elegant">
+                                                    <i class="bi bi-trash me-2"></i>Eliminar Cliente
+                                                </button>
+                                                <a href="{% url 'productos:listar_clientes' %}" class="btn btn-outline-elegant btn-elegant">
+                                                    <i class="bi bi-arrow-left me-2"></i>Cancelar
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Footer Section -->
+                    <div class="footer-section">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                            <div class="d-flex gap-2">
+                                <button onclick="history.back()" class="btn btn-outline-elegant btn-elegant">
+                                    <i class="bi bi-arrow-left me-2"></i>Volver
+                                </button>
+                                <a href="{% url 'home' %}" class="btn btn-outline-elegant btn-elegant">
+                                    <i class="bi bi-house me-2"></i>Inicio
+                                </a>
+                            </div>
+
+                            <div class="text-muted small">
+                                <i class="bi bi-shield-check me-1"></i>
+                                Sistema de Gestión Empresarial
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        {% elif vista == "delete" %}
-            <div class="card">
-                <div class="card-body">
-                    <p>¿Estás seguro que deseas eliminar a <strong>{{ cliente.nombre }} {{ cliente.apellidos }}</strong>?</p>
-                    <form method="post">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Confirmar</button>
-                        <a href="{% url 'productos:listar_clientes' %}" class="btn btn-secondary">Cancelar</a>
-                    </form>
-                </div>
-            </div>
-        {% endif %}
-
-        <div class="mt-4">
-            <button onclick="history.back()" class="btn btn-outline-primary">← Volver atrás</button>
-            <a href="{% url 'home' %}" class="btn btn-outline-dark">🏠 Ir al inicio</a>
         </div>
     </div>
 
-    <!-- Bootstrap JS (opcional, si necesitas funcionalidades JS) -->
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        // Smooth animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-elegant, .table-elegant');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
 </body>
 </html>

@@ -226,3 +226,25 @@ def eliminar_repartidor(request, id):
         'title': f'Eliminar Repartidor: {repartidor.nombre}',
         'vista': 'delete'
     })
+
+
+# ---------------- BACKUP ------------------
+# ---------------- BACKUP ------------------
+
+def descargar_backup(request):
+    buffer = io.StringIO()
+    management.call_command('dumpdata', stdout=buffer)
+    response = HttpResponse(buffer.getvalue(), content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename=backup.json'
+    return response
+
+from django.core import management
+import io
+from django.http import HttpResponse
+
+def descargar_backup(request):
+    buffer = io.StringIO()
+    management.call_command('dumpdata', stdout=buffer)
+    response = HttpResponse(buffer.getvalue(), content_type='application/json')
+    response['Content-Disposition'] = 'attachment; filename=backup.json'
+    return response

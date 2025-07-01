@@ -6,72 +6,525 @@
     <title>{{ title }}</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #64748b;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --dark-color: #1e293b;
+            --light-color: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .main-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+            color: white;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(30px, -30px);
+        }
+
+        .header-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-20px, 20px);
+        }
+
+        .header-title {
+            font-weight: 700;
+            font-size: 2.25rem;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-subtitle {
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            padding: 2rem;
+        }
+
+        .btn-elegant {
+            border-radius: 12px;
+            font-weight: 500;
+            padding: 12px 24px;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-elegant:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary-elegant {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #3b82f6 100%);
+            color: white;
+        }
+
+        .btn-success-elegant {
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            color: white;
+        }
+
+        .btn-warning-elegant {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #d97706 100%);
+            color: white;
+        }
+
+        .btn-danger-elegant {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #dc2626 100%);
+            color: white;
+        }
+
+        .btn-outline-elegant {
+            border: 2px solid var(--border-color);
+            background: white;
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .btn-outline-elegant:hover {
+            background: var(--light-color);
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .table-elegant {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            background: white;
+        }
+
+        .table-elegant thead th {
+            background: linear-gradient(135deg, var(--dark-color) 0%, #334155 100%);
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 1.2rem 1rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-elegant tbody td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        .table-elegant tbody tr:hover {
+            background-color: rgba(37, 99, 235, 0.04);
+        }
+
+        .table-elegant tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .card-elegant {
+            border-radius: 16px;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .card-elegant .card-body {
+            padding: 2rem;
+        }
+
+        .form-control {
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-badge {
+            background: linear-gradient(135deg, var(--success-color) 0%, #059669 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .stock-badge {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-sm-elegant {
+            padding: 8px 16px;
+            font-size: 0.85rem;
+            border-radius: 8px;
+        }
+
+        .footer-section {
+            background: var(--light-color);
+            padding: 1.5rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .icon-primary {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 1.8rem;
+            }
+
+            .main-container {
+                margin: 10px;
+                border-radius: 16px;
+            }
+
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
-<body class="bg-light">
-    <div class="container mt-4">
-        <h1 class="mb-4">{{ title }}</h1>
+<body>
+    <div class="container-fluid px-3">
+        <div class="row justify-content-center">
+            <div class="col-12 col-xl-10">
+                <div class="main-container">
+                    <!-- Header Section -->
+                    <div class="header-section">
+                        <div class="icon-box icon-primary d-inline-flex">
+                            <i class="bi bi-box-seam"></i>
+                        </div>
+                        <h1 class="header-title">{{ title }}</h1>
+                        <p class="header-subtitle mb-0">
+                            {% if vista == "lista" %}
+                                Gestiona tu inventario de forma eficiente
+                            {% elif vista == "form" %}
+                                {% if object %}Actualizar información del producto{% else %}Agregar nuevo producto al inventario{% endif %}
+                            {% elif vista == "delete" %}
+                                Confirmación de eliminación
+                            {% endif %}
+                        </p>
+                    </div>
 
-        {% if vista == "lista" %}
-            <a href="{% url 'productos:crear_producto' %}" class="btn btn-primary mb-3">Crear nuevo producto</a>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for p in productos %}
-                        <tr>
-                            <td>{{ p.nombre }}</td>
-                            <td>${{ p.precio }}</td>
-                            <td>{{ p.stock }}</td>
-                            <td>
-                                <a href="{% url 'productos:actualizar_producto' p.id %}" class="btn btn-sm btn-warning">Editar</a>
-                                <a href="{% url 'productos:eliminar_producto' p.id %}" class="btn btn-sm btn-danger">Eliminar</a>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                    <!-- Content Section -->
+                    <div class="content-section">
+                        {% if vista == "lista" %}
+                            <!-- Action Button -->
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <div>
+                                    <h5 class="mb-1">Lista de Productos</h5>
+                                    <p class="text-muted mb-0">{{ productos|length }} producto{{ productos|length|pluralize }}</p>
+                                </div>
+                                <a href="{% url 'productos:crear_producto' %}" class="btn btn-primary-elegant btn-elegant">
+                                    <i class="bi bi-plus-lg me-2"></i>Nuevo Producto
+                                </a>
+                            </div>
 
-        {% elif vista == "form" %}
-            <div class="card">
-                <div class="card-body">
-                    <form method="post">
-                        {% csrf_token %}
-                        {{ form.as_p }}
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <a href="{% url 'productos:listar_productos' %}" class="btn btn-secondary">Cancelar</a>
-                    </form>
+                            <!-- Products Table -->
+                            <div class="table-responsive">
+                                <table class="table table-elegant mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th><i class="bi bi-tag me-2"></i>Producto</th>
+                                            <th><i class="bi bi-currency-dollar me-2"></i>Precio</th>
+                                            <th><i class="bi bi-boxes me-2"></i>Stock</th>
+                                            <th><i class="bi bi-gear me-2"></i>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for p in productos %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="icon-box icon-primary me-3" style="width: 40px; height: 40px; font-size: 1.2rem;">
+                                                        <i class="bi bi-box"></i>
+                                                    </div>
+                                                    <div>
+                                                        <h6 class="mb-0">{{ p.nombre }}</h6>
+                                                        <small class="text-muted">SKU: #{{ p.id|stringformat:"04d" }}</small>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="price-badge">${{ p.precio }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="stock-badge">{{ p.stock }} unidades</span>
+                                            </td>
+                                            <td>
+                                                <div class="action-buttons">
+                                                    <a href="{% url 'productos:actualizar_producto' p.id %}"
+                                                       class="btn btn-warning-elegant btn-sm-elegant btn-elegant">
+                                                        <i class="bi bi-pencil"></i>
+                                                    </a>
+                                                    <a href="{% url 'productos:eliminar_producto' p.id %}"
+                                                       class="btn btn-danger-elegant btn-sm-elegant btn-elegant">
+                                                        <i class="bi bi-trash"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% empty %}
+                                        <tr>
+                                            <td colspan="4" class="text-center py-5">
+                                                <div class="icon-box icon-primary mx-auto mb-3">
+                                                    <i class="bi bi-inbox"></i>
+                                                </div>
+                                                <h6 class="text-muted">No hay productos registrados</h6>
+                                                <p class="text-muted mb-0">Comienza agregando tu primer producto</p>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        {% elif vista == "form" %}
+                            <!-- Form Card -->
+                            <div class="card-elegant">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <form method="post" class="needs-validation" novalidate>
+                                                {% csrf_token %}
+
+                                                <div class="row g-3">
+                                                    <div class="col-12">
+                                                        <label for="{{ form.nombre.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-tag me-2"></i>Nombre del Producto
+                                                        </label>
+                                                        {{ form.nombre }}
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="{{ form.precio.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-currency-dollar me-2"></i>Precio
+                                                        </label>
+                                                        {{ form.precio }}
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="{{ form.stock.id_for_label }}" class="form-label">
+                                                            <i class="bi bi-boxes me-2"></i>Stock
+                                                        </label>
+                                                        {{ form.stock }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="d-flex gap-3 mt-4 pt-3 border-top">
+                                                    <button type="submit" class="btn btn-success-elegant btn-elegant">
+                                                        <i class="bi bi-check-lg me-2"></i>Guardar Producto
+                                                    </button>
+                                                    <a href="{% url 'productos:listar_productos' %}" class="btn btn-outline-elegant btn-elegant">
+                                                        <i class="bi bi-x-lg me-2"></i>Cancelar
+                                                    </a>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="stats-card">
+                                                <div class="icon-box icon-primary">
+                                                    <i class="bi bi-lightbulb"></i>
+                                                </div>
+                                                <h6>Consejos</h6>
+                                                <ul class="list-unstyled text-muted small">
+                                                    <li class="mb-2">• Usa nombres descriptivos y únicos</li>
+                                                    <li class="mb-2">• Verifica el precio antes de guardar</li>
+                                                    <li class="mb-2">• Mantén el stock actualizado</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% elif vista == "delete" %}
+                            <!-- Delete Confirmation -->
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="card-elegant border-danger">
+                                        <div class="card-body text-center">
+                                            <div class="icon-box mx-auto mb-3" style="background: rgba(239, 68, 68, 0.1); color: var(--danger-color);">
+                                                <i class="bi bi-exclamation-triangle"></i>
+                                            </div>
+
+                                            <h5 class="mb-3">Confirmar Eliminación</h5>
+                                            <p class="text-muted mb-4">
+                                                ¿Estás seguro que deseas eliminar el producto<br>
+                                                <strong>"{{ producto.nombre }}"</strong>?
+                                            </p>
+
+                                            <div class="alert alert-warning d-flex align-items-center" role="alert">
+                                                <i class="bi bi-info-circle me-2"></i>
+                                                <small>Esta acción no se puede deshacer</small>
+                                            </div>
+
+                                            <form method="post" class="d-flex gap-3 justify-content-center">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger-elegant btn-elegant">
+                                                    <i class="bi bi-trash me-2"></i>Eliminar Producto
+                                                </button>
+                                                <a href="{% url 'productos:listar_productos' %}" class="btn btn-outline-elegant btn-elegant">
+                                                    <i class="bi bi-arrow-left me-2"></i>Cancelar
+                                                </a>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Footer Section -->
+                    <div class="footer-section">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                            <div class="d-flex gap-2">
+                                <button onclick="history.back()" class="btn btn-outline-elegant btn-elegant">
+                                    <i class="bi bi-arrow-left me-2"></i>Volver
+                                </button>
+                                <a href="{% url 'home' %}" class="btn btn-outline-elegant btn-elegant">
+                                    <i class="bi bi-house me-2"></i>Inicio
+                                </a>
+                            </div>
+
+                            <div class="text-muted small">
+                                <i class="bi bi-shield-check me-1"></i>
+                                Sistema de Inventario v2.0
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-        {% elif vista == "delete" %}
-            <div class="card border-danger">
-                <div class="card-body">
-                    <p class="h5">¿Estás seguro que deseas eliminar <strong>"{{ producto.nombre }}"</strong>?</p>
-                    <form method="post" class="mt-3">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-danger">Confirmar</button>
-                        <a href="{% url 'productos:listar_productos' %}" class="btn btn-secondary">Cancelar</a>
-                    </form>
-                </div>
-            </div>
-        {% endif %}
-
-        <!-- Botones para volver -->
-        <div class="mt-4">
-            <button onclick="history.back()" class="btn btn-outline-primary">← Volver atrás</button>
-            <a href="{% url 'home' %}" class="btn btn-outline-dark">🏠 Ir al inicio</a>
         </div>
     </div>
 
-    <!-- Bootstrap JS Bundle con Popper -->
+    <!-- Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Form validation
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+
+        // Smooth animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.card-elegant, .table-elegant');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
 </body>
 </html>
